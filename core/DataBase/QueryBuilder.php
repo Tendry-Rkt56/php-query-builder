@@ -80,4 +80,17 @@ class QueryBuilder
           return $stmt->execute(array_values($data));
      }
 
+     public function update(array $data): bool
+     {
+          $set = implode(', ', array_map(fn($key) => "$key = ?", array_keys($data)));
+          $sql = "UPDATE $this->table SET $set";
+
+          if (!empty($this->where)) {
+               $sql .= " WHERE " . implode(' AND ', $this->where);
+          }
+
+          $stmt = $this->database->getConn()->prepare($sql);
+          return $stmt->execute(array_merge(array_values($data), $this->bindings));
+     }
+
 }
