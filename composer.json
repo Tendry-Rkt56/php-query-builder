@@ -2,7 +2,8 @@
     "name": "tendry/query-builder",
     "autoload": {
         "psr-4": {
-            "Tendry\\QueryBuilder\\": "src/"
+            "Core\\": "core/",
+            "App\\": "src/"
         }
     },
     "authors": [
