@@ -1,0 +1,15 @@
+{
+    "name": "tendry/query-builder",
+    "autoload": {
+        "psr-4": {
+            "Tendry\\QueryBuilder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tendry",
+            "email": "tendryzephyrin@gmail.com"
+        }
+    ],
+    "require": {}
+}
