@@ -70,4 +70,14 @@ class QueryBuilder
          return $stmt->fetchAll(\PDO::FETCH_ASSOC);
      }
 
+     public function insert(array $data): bool
+     {
+          $columns = implode(', ', array_keys($data));
+          $placeholders = implode(', ', array_fill(0, count($data), '?'));
+
+          $sql = "INSERT INTO $this->table ($columns) VALUES ($placeholders)";
+          $stmt = $this->database->getConn()->prepare($sql);
+          return $stmt->execute(array_values($data));
+     }
+
 }
