@@ -49,4 +49,25 @@ class QueryBuilder
          return $this;
      }
 
+     public function get(): array
+     {
+         $sql = "SELECT $this->columns FROM $this->table";
+ 
+         if (!empty($this->where)) {
+             $sql .= " WHERE " . implode(' AND ', $this->where);
+         }
+ 
+         if (!empty($this->orderBy)) {
+             $sql .= " $this->orderBy";
+         }
+ 
+         if (!empty($this->limit)) {
+             $sql .= " $this->limit";
+         }
+ 
+         $stmt = $this->database->getConn()->prepare($sql);
+         $stmt->execute($this->bindings);
+         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+     }
+
 }
