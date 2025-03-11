@@ -1,8 +1,6 @@
 <?php
 
-<?php
-
-namespace Config;
+namespace Core\DataBase;
 
 class DataBase 
 {
