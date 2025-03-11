@@ -24,7 +24,7 @@ class App
           return self::$_db;
      }
 
-     public function getQueryBuilder()
+     public function getQueryBuilder(): QueryBuilder
      {
           if (self::$_builder == null) self::$_builder = new QueryBuilder($this->getDb());
           return self::$_builder;
