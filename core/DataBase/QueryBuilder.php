@@ -8,7 +8,7 @@ class QueryBuilder
     private DataBase $database;
     private string $table;
     private string $columns = '*';
-    private array $where = [];
+    private array $whereClaus = [];
     private array $bindings = [];
     private string $orderBy = '';
     private string $limit = '';
@@ -32,7 +32,14 @@ class QueryBuilder
 
     public function where(string $column, string $operator, mixed $value): self
     {
-        $this->where[] = "$column $operator ?";
+        $this->whereClaus[] = ["AND", "$column", "$operator ?"];
+        $this->bindings[] = $value;
+        return $this;
+    }
+
+    public function orWhere(string $column, string $operator, mixed $value):self
+    {
+        $this->whereClaus[] = ["OR", "$column", "$operator ?"];
         $this->bindings[] = $value;
         return $this;
     }
@@ -53,8 +60,17 @@ class QueryBuilder
     {
         $sql = "SELECT $this->columns FROM $this->table";
  
-        if (!empty($this->where)) {
-            $sql .= " WHERE " . implode(' AND ', $this->where);
+        if (!empty($this->whereClaus)) {
+            $whereParts = [];
+            foreach($this->whereClaus as [$conditionType, $claus]) {
+                if (empty($whereParts)) {
+                    $whereParts[] = $claus;
+                }
+                else {
+                    $whereParts[] = "$conditionType $claus";
+                }
+            }
+            $sql .= " WHERE " . implode(' AND ', $whereParts);
         }
  
         if (!empty($this->orderBy)) {
