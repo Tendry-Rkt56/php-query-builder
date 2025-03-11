@@ -93,4 +93,16 @@ class QueryBuilder
           return $stmt->execute(array_merge(array_values($data), $this->bindings));
      }
 
+     public function delete(): bool
+     {
+          $sql = "DELETE FROM $this->table";
+
+          if (!empty($this->where)) {
+               $sql .= " WHERE " . implode(' AND ', $this->where);
+          }
+
+          $stmt = $this->database->getConn()->prepare($sql);
+          return $stmt->execute($this->bindings);
+     }
+
 }
