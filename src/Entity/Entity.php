@@ -15,7 +15,11 @@ class Entity extends QueryBuilder
           parent::__construct($db);
      }
 
-     public function findAll()
+     /**
+      * Récupère tous les enregistrements
+      * @return array
+      */
+     public function findAll(): array
      {
           return $this->table($this->table)->get();
      }
