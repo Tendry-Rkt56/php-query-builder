@@ -128,14 +128,26 @@ class QueryBuilder
 
     public function delete(): bool
     {
-        $sql = "DELETE FROM $this->table";
-
-        if (!empty($this->where)) {
-            $sql .= " WHERE " . implode(' AND ', $this->where);
+        if (empty($this->whereClaus)) {
+            throw new \Exception("Une condition WHERE est requise pour DELETE");
         }
 
-        $stmt = $this->database->getConn()->prepare($sql);
+        $query = "DELETE FROM {$this->table}";
+
+        $whereParts = [];
+        foreach ($this->whereClaus as [$conditionType, $clause]) {
+            if (empty($whereParts)) {
+                $whereParts[] = $clause;
+            } else {
+                $whereParts[] = "$conditionType $clause";
+            }
+        }
+
+        $query .= " WHERE " . implode(" ", $whereParts);
+
+        $stmt = $this->database->getConn()->prepare($query);
         return $stmt->execute($this->bindings);
     }
+
 
 }
