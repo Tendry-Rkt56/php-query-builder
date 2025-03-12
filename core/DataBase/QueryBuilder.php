@@ -154,9 +154,12 @@ class QueryBuilder
         $query .= " WHERE " . implode(" ", $whereParts);
 
         $stmt = $this->database->getConn()->prepare($query);
+        $result =  $stmt->execute($this->bindings);
         $this->clearWhere();
-        return $stmt->execute($this->bindings);
+        return $result;
     }
+
+    
 
 
 }
