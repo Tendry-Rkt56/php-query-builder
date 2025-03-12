@@ -24,6 +24,10 @@ class Entity extends QueryBuilder
           return $this->table($this->table)->get();
      }
 
+     /**
+      * Récupère un enregistrement en particulier grâce à son id
+      * @param int $id
+      */
      public function find(int $id)
      {
           return $this->table($this->table)->where('id', '=', $id)->get();

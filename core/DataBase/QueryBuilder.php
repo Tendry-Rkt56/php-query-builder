@@ -87,6 +87,37 @@ class QueryBuilder
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getOne(): array
+    {
+        $sql = "SELECT $this->columns FROM $this->table";
+ 
+        if (!empty($this->whereClaus)) {
+            $whereParts = [];
+            foreach($this->whereClaus as [$conditionType, $claus]) {
+                if (empty($whereParts)) {
+                    $whereParts[] = $claus;
+                }
+                else {
+                    $whereParts[] = "$conditionType $claus";
+                }
+            }
+            $sql .= " WHERE " . implode(' ', $whereParts);
+        }
+ 
+        if (!empty($this->orderBy)) {
+            $sql .= " $this->orderBy";
+        }
+ 
+        if (!empty($this->limit)) {
+            $sql .= " $this->limit";
+        }
+ 
+        $stmt = $this->database->getConn()->prepare($sql);
+        $stmt->execute($this->bindings);
+        $this->clearWhere();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
     private function clearWhere(): void
     {
         $this->whereClaus = [];
