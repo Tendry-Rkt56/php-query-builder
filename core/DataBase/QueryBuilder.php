@@ -103,6 +103,12 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Définit la limite des résultats à récupérer.
+     * 
+     * @param int $limit Nombre de résultats maximum à récupérer.
+     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+    */
     public function limit(int $limit): self
     {
         $this->limit = "LIMIT $limit";
