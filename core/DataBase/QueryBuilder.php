@@ -151,37 +151,45 @@ class QueryBuilder
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Récupère une seule ligne de résultat de la base de données en fonction des critères spécifiés.
+     *
+     * Cette méthode exécute une requête `SELECT` sur la table spécifiée à l'aide des colonnes choisies, 
+     * avec des conditions `WHERE`, `ORDER BY` et `LIMIT` si elles ont été définies via la méthode de construction 
+     * de la requête. Elle retourne le premier résultat sous forme de tableau associatif.
+     *
+     * Si aucune ligne ne correspond aux critères, la méthode retournera `false`.
+     *
+     * @return mixed Le premier résultat de la requête sous forme de tableau associatif ou `false` si aucun résultat trouvé.
+     *
+     * @throws \PDOException Si la requête échoue lors de l'exécution.
+    */
     public function getOne(): mixed
     {
         $sql = "SELECT $this->columns FROM $this->table";
 
-        // Construction de la clause WHERE
         if (!empty($this->whereClaus)) {
             $sql .= " WHERE " . implode(' ', array_map(function($whereClause) {
-                return $whereClause[1]; // On récupère la condition sans l'opérateur logique (AND/OR)
+                return $whereClause[1];
             }, $this->whereClaus));
         }
 
-        // Ajout de l'ORDER BY si spécifié
         if (!empty($this->orderBy)) {
             $sql .= " $this->orderBy";
         }
 
-        // Limite si spécifiée
         if (!empty($this->limit)) {
             $sql .= " $this->limit";
         }
 
-        // Préparation et exécution de la requête
         $stmt = $this->database->getConn()->prepare($sql);
         $stmt->execute($this->bindings);
 
-        // On nettoie les clauses WHERE pour la prochaine utilisation
         $this->clearWhere();
 
-        // Retourne le premier résultat sous forme de tableau associatif
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
 
 
     /**
