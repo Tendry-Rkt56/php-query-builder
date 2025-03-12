@@ -188,6 +188,12 @@ class QueryBuilder
         $this->bindings = [];
     }
 
+    /**
+     * Exécute une requête INSERT pour insérer des données dans la table.
+     * 
+     * @param array $data Données à insérer sous forme de tableau associatif.
+     * @return bool Retourne true si l'insertion est réussie, false sinon.
+    */
     public function insert(array $data): bool
     {
         $columns = implode(', ', array_keys($data));
