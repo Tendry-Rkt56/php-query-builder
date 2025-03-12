@@ -26,6 +26,11 @@ class QueryBuilder
     // Limite du nombre de résultats
     private string $limit = '';
 
+    /**
+     * Constructeur de la classe QueryBuilder
+     * 
+     * @param DataBase $pdo Instance de la classe DataBase pour la connexion à la base de données.
+     */
     public function __construct(DataBase $pdo)
     {
         $this->database = $pdo;
