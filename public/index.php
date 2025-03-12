@@ -18,4 +18,5 @@ $article = $app->getEntity(Article::class);
 var_dump($queryBuilder->table('articles')->where('nom', 'LIKE', '%lasopy%')->orWhere('category_id', '=', 2)->get());
 var_dump($queryBuilder->table('category')->get());
 var_dump($article->findAll());
-var_dump($queryBuilder->where('id', '=', 84)->delete());
+var_dump($queryBuilder->table('articles')->where('id', '=', 84)->delete());
+var_dump($queryBuilder->table('articles')->insert(['nom' => 'Lasopy atody', 'prix' => 5000, 'category_id' => 5]));
