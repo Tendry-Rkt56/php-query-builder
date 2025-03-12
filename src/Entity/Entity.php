@@ -39,7 +39,7 @@ class Entity extends QueryBuilder
       * @param int $id
       * @return bool
       */
-     public function remove(int $id)
+     public function remove(int $id): bool
      {
           return $this->table($this->table)->where('id', '=', $id)->delete();
      }
