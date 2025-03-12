@@ -182,6 +182,12 @@ class QueryBuilder
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Réinitialise les conditions WHERE et les valeurs liées pour les prochaines requêtes.
+     * Cette méthode permet de ne pas réutiliser des conditions incorrectes après une requête.
+     * 
+     * @return void
+    */
     private function clearWhere(): void
     {
         $this->whereClaus = [];
