@@ -75,6 +75,14 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Ajoute une condition OR WHERE à la requête.
+     * 
+     * @param string $column Nom de la colonne à conditionner.
+     * @param string $operator L'opérateur de comparaison.
+     * @param mixed $value La valeur à comparer.
+     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+    */
     public function orWhere(string $column, string $operator, mixed $value):self
     {
         $this->whereClaus[] = ["OR", "$column $operator ?"];
