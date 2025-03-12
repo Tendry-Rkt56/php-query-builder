@@ -56,7 +56,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function get(): mixed
+    public function get(): array
     {
         $sql = "SELECT $this->columns FROM $this->table";
  
