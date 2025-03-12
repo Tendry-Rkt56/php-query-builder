@@ -202,8 +202,14 @@ class QueryBuilder
         $sql = "INSERT INTO $this->table ($columns) VALUES ($placeholders)";
         $stmt = $this->database->getConn()->prepare($sql);
         return $stmt->execute(array_values($data));
-     }
+    }
 
+    /**
+     * Exécute une requête UPDATE pour mettre à jour les données dans la table.
+     * 
+     * @param array $data Données à mettre à jour sous forme de tableau associatif.
+     * @return bool Retourne true si la mise à jour est réussie, false sinon.
+    */
     public function update(array $data): bool
     {
         if (empty($this->whereClaus)) {
