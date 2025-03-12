@@ -241,6 +241,11 @@ class QueryBuilder
     }
 
 
+    /**
+     * Exécute une requête DELETE pour supprimer des données dans la table.
+     * 
+     * @return bool Retourne true si la suppression est réussie, false sinon.
+    */
     public function delete(): bool
     {
         if (empty($this->whereClaus)) {
