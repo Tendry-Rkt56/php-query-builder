@@ -32,14 +32,14 @@ class QueryBuilder
 
     public function where(string $column, string $operator, mixed $value): self
     {
-        $this->whereClaus[] = ["AND", "$column", "$operator ?"];
+        $this->whereClaus[] = ["AND", "$column $operator ?"];
         $this->bindings[] = $value;
         return $this;
     }
 
     public function orWhere(string $column, string $operator, mixed $value):self
     {
-        $this->whereClaus[] = ["OR", "$column", "$operator ?"];
+        $this->whereClaus[] = ["OR", "$column $operator ?"];
         $this->bindings[] = $value;
         return $this;
     }
@@ -56,7 +56,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function get(): array
+    public function get(): mixed
     {
         $sql = "SELECT $this->columns FROM $this->table";
  
@@ -70,7 +70,7 @@ class QueryBuilder
                     $whereParts[] = "$conditionType $claus";
                 }
             }
-            $sql .= " WHERE " . implode(' AND ', $whereParts);
+            $sql .= " WHERE " . implode(' ', $whereParts);
         }
  
         if (!empty($this->orderBy)) {
@@ -82,6 +82,7 @@ class QueryBuilder
         }
  
         $stmt = $this->database->getConn()->prepare($sql);
+        return $sql;
         $stmt->execute($this->bindings);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

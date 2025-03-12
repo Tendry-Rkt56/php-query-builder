@@ -15,6 +15,6 @@ $app = App::getInstance();
 $queryBuilder = $app->getQueryBuilder();
 $article = $app->getEntity(Article::class);
 
-var_dump($queryBuilder->table('articles')->get());
-var_dump($queryBuilder->table('category')->get());
-var_dump($article->findAll());
+var_dump($queryBuilder->table('articles')->where('nom', 'LIKE', '%lasopy%')->orWhere('category_id', '=', 2)->get());
+// var_dump($queryBuilder->table('category')->get());
+// var_dump($article->findAll());
