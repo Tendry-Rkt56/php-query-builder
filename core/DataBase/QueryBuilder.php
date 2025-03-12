@@ -5,12 +5,25 @@ namespace Core\DataBase;
 class QueryBuilder 
 {
 
+    // Instance de la classe DataBase pour gérer la connexion PDO
     private DataBase $database;
+
+    // Nom de la table pour effectuer les requêtes
     private string $table;
+
+    // Colonnes à sélectionner (par défaut ' * ' pour toutes les colonnes)
     private string $columns = '*';
+
+    // Conditions WHERE pour filtrer les résultats
     private array $whereClaus = [];
+
+    // Valeurs liées aux paramètres de la requête
     private array $bindings = [];
+
+    // Critères d'ordonnancement des résultats
     private string $orderBy = '';
+
+    // Limite du nombre de résultats
     private string $limit = '';
 
     public function __construct(DataBase $pdo)
