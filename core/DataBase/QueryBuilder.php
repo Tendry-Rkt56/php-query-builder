@@ -52,7 +52,7 @@ class QueryBuilder
      * Définit les colonnes à sélectionner dans la requête.
      * 
      * @param array|string $columns Colonnes à sélectionner. Par défaut, sélectionne toutes les colonnes ('*').
-     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+     * @return self
     */
     public function select(array|string $columns = '*'): self
     {
@@ -66,7 +66,7 @@ class QueryBuilder
      * @param string $column Nom de la colonne à conditionner.
      * @param string $operator L'opérateur de comparaison (ex : '=', '>', '<').
      * @param mixed $value La valeur à comparer.
-     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+     * @return self
     */
     public function where(string $column, string $operator, mixed $value): self
     {
@@ -81,7 +81,7 @@ class QueryBuilder
      * @param string $column Nom de la colonne à conditionner.
      * @param string $operator L'opérateur de comparaison.
      * @param mixed $value La valeur à comparer.
-     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+     * @return self
     */
     public function orWhere(string $column, string $operator, mixed $value):self
     {
@@ -95,7 +95,7 @@ class QueryBuilder
      * 
      * @param string $column Colonne par laquelle trier les résultats.
      * @param string $direction Direction du tri (ASC ou DESC).
-     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+     * @return self
     */
     public function orderBy(string $column, string $direction = 'ASC'): self
     {
@@ -107,7 +107,7 @@ class QueryBuilder
      * Définit la limite des résultats à récupérer.
      * 
      * @param int $limit Nombre de résultats maximum à récupérer.
-     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+     * @return self
     */
     public function limit(int $limit): self
     {
