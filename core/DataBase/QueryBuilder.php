@@ -115,6 +115,11 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Exécute la requête SELECT et retourne les résultats sous forme de tableau.
+     * 
+     * @return array Résultats de la requête sous forme de tableau associatif.
+    */
     public function get(): array
     {
         $sql = "SELECT $this->columns FROM $this->table";
