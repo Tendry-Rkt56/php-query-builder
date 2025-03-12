@@ -34,6 +34,11 @@ class Entity extends QueryBuilder
           return $this->table($this->table)->where('id', '=', $id)->getOne();
      }
 
+     /**
+      * Supprime un enregistrement
+      * @param int $id
+      * @return bool
+      */
      public function remove(int $id)
      {
           return $this->table($this->table)->where('id', '=', $id)->delete();
