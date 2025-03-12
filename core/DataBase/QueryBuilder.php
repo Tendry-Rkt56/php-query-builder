@@ -48,6 +48,12 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Définit les colonnes à sélectionner dans la requête.
+     * 
+     * @param array|string $columns Colonnes à sélectionner. Par défaut, sélectionne toutes les colonnes ('*').
+     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+    */
     public function select(array|string $columns = '*'): self
     {
         $this->columns = is_array($columns) ? implode(', ', $columns) : $columns;
