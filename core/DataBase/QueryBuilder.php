@@ -154,33 +154,35 @@ class QueryBuilder
     public function getOne(): mixed
     {
         $sql = "SELECT $this->columns FROM $this->table";
- 
+
+        // Construction de la clause WHERE
         if (!empty($this->whereClaus)) {
-            $whereParts = [];
-            foreach($this->whereClaus as [$conditionType, $claus]) {
-                if (empty($whereParts)) {
-                    $whereParts[] = $claus;
-                }
-                else {
-                    $whereParts[] = "$conditionType $claus";
-                }
-            }
-            $sql .= " WHERE " . implode(' ', $whereParts);
+            $sql .= " WHERE " . implode(' ', array_map(function($whereClause) {
+                return $whereClause[1]; // On récupère la condition sans l'opérateur logique (AND/OR)
+            }, $this->whereClaus));
         }
- 
+
+        // Ajout de l'ORDER BY si spécifié
         if (!empty($this->orderBy)) {
             $sql .= " $this->orderBy";
         }
- 
+
+        // Limite si spécifiée
         if (!empty($this->limit)) {
             $sql .= " $this->limit";
         }
- 
+
+        // Préparation et exécution de la requête
         $stmt = $this->database->getConn()->prepare($sql);
         $stmt->execute($this->bindings);
+
+        // On nettoie les clauses WHERE pour la prochaine utilisation
         $this->clearWhere();
+
+        // Retourne le premier résultat sous forme de tableau associatif
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
 
     /**
      * Réinitialise les conditions WHERE et les valeurs liées pour les prochaines requêtes.
