@@ -5,6 +5,9 @@ namespace App;
 use Core\DataBase\DataBase;
 use Core\DataBase\QueryBuilder;
 
+/**
+ * @template T of object
+ */
 class App 
 {
 
@@ -30,6 +33,11 @@ class App
           return self::$_builder;
      }
 
+     /**
+     * @template T of object
+     * @param class-string<T> $entity
+     * @return T
+     */
      public function getEntity(string $class)
      {
           return new $class($this->getDb());
