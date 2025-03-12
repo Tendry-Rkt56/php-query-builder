@@ -96,18 +96,35 @@ class QueryBuilder
         return $stmt->execute(array_values($data));
      }
 
-     public function update(array $data): bool
-     {
-        $set = implode(', ', array_map(fn($key) => "$key = ?", array_keys($data)));
-        $sql = "UPDATE $this->table SET $set";
-
-        if (!empty($this->where)) {
-            $sql .= " WHERE " . implode(' AND ', $this->where);
+    public function update(array $data): bool
+    {
+        if (empty($this->whereClaus)) {
+            throw new \Exception("Une condition WHERE est requise pour UPDATE");
         }
 
-        $stmt = $this->database->getConn()->prepare($sql);
-        return $stmt->execute(array_merge(array_values($data), $this->bindings));
-     }
+        $setParts = [];
+        foreach ($data as $column => $value) {
+            $setParts[] = "$column = ?";
+            $this->bindings[] = $value; // Ajouter les valeurs de mise à jour
+        }
+
+        $query = "UPDATE {$this->table} SET " . implode(", ", $setParts);
+
+        $whereParts = [];
+        foreach ($this->whereClaus as [$conditionType, $clause]) {
+            if (empty($whereParts)) {
+                $whereParts[] = $clause; // Première condition sans AND/OR
+            } else {
+                $whereParts[] = "$conditionType $clause";
+            }
+        }
+
+        $query .= " WHERE " . implode(" ", $whereParts);
+
+        $stmt = $this->database->getConn()->prepare($query);
+        return $stmt->execute($this->bindings);
+    }
+
 
     public function delete(): bool
     {
