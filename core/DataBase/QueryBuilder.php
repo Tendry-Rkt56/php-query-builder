@@ -82,7 +82,6 @@ class QueryBuilder
         }
  
         $stmt = $this->database->getConn()->prepare($sql);
-        return $sql;
         $stmt->execute($this->bindings);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
