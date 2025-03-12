@@ -90,6 +90,13 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Définit les critères de tri (ORDER BY) pour la requête.
+     * 
+     * @param string $column Colonne par laquelle trier les résultats.
+     * @param string $direction Direction du tri (ASC ou DESC).
+     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+    */
     public function orderBy(string $column, string $direction = 'ASC'): self
     {
         $this->orderBy = "ORDER BY $column $direction";
