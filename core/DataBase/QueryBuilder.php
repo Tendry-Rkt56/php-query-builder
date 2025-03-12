@@ -36,6 +36,12 @@ class QueryBuilder
         $this->database = $pdo;
     }
 
+    /**
+     * Définit la table pour la requête.
+     * 
+     * @param string $table Nom de la table.
+     * @return self Retourne l'instance actuelle pour permettre la méthode de chaînage.
+    */
     public function table(string $table): self
     {
         $this->table = $table;
