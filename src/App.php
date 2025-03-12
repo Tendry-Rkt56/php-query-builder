@@ -35,7 +35,7 @@ class App
 
      /**
      * @template T of object
-     * @param class-string<T> $entity
+     * @param class-string<T> $class
      * @return T
      */
      public function getEntity(string $class)

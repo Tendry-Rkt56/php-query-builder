@@ -25,5 +25,10 @@ class Entity extends QueryBuilder
           return $this->table($this->table)->where('id', '=', $id)->get();
      }
 
+     public function remove(int $id)
+     {
+          return $this->table($this->table)->where('id', '=', $id)->delete();
+     }
+
 
 }
