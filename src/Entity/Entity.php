@@ -27,10 +27,11 @@ class Entity extends QueryBuilder
      /**
       * Récupère un enregistrement en particulier grâce à son id
       * @param int $id
+      * @return mixed
       */
      public function find(int $id)
      {
-          return $this->table($this->table)->where('id', '=', $id)->get();
+          return $this->table($this->table)->where('id', '=', $id)->getOne();
      }
 
      public function remove(int $id)

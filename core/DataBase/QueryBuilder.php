@@ -87,7 +87,7 @@ class QueryBuilder
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getOne(): array
+    public function getOne(): mixed
     {
         $sql = "SELECT $this->columns FROM $this->table";
  
