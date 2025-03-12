@@ -83,7 +83,14 @@ class QueryBuilder
  
         $stmt = $this->database->getConn()->prepare($sql);
         $stmt->execute($this->bindings);
+        $this->clearWhere();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    private function clearWhere(): void
+    {
+        $this->whereClaus = [];
+        $this->bindings = [];
     }
 
     public function insert(array $data): bool
@@ -122,6 +129,7 @@ class QueryBuilder
         $query .= " WHERE " . implode(" ", $whereParts);
 
         $stmt = $this->database->getConn()->prepare($query);
+        $this->clearWhere();
         return $stmt->execute($this->bindings);
     }
 
@@ -146,6 +154,7 @@ class QueryBuilder
         $query .= " WHERE " . implode(" ", $whereParts);
 
         $stmt = $this->database->getConn()->prepare($query);
+        $this->clearWhere();
         return $stmt->execute($this->bindings);
     }
 
