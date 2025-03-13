@@ -34,6 +34,12 @@ class App
      */
      private static $_builder;
 
+     
+     /**
+     * Retourne l'instance unique de l'application (Singleton).
+     *
+     * @return self L'instance de l'application.
+     */
      public static function getInstance(): self
      {
           if (self::$_instance == null) self::$_instance = new self();
