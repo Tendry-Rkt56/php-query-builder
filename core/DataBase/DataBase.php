@@ -37,6 +37,11 @@ class DataBase
           $this->conn = new \PDO("mysql:host=".DB_HOST.";dbname=".$this->dbName.";charset=".DB_CHARSET, DB_USER, DB_PASS);
      }
 
+     /**
+     * Retourne l'instance de connexion PDO.
+     *
+     * @return \PDO L'objet PDO représentant la connexion à la base de données.
+     */
      public function getConn(): \PDO
      {
           return $this->conn;
