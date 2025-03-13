@@ -29,7 +29,7 @@ class Entity extends QueryBuilder
       * @param int $id
       * @return mixed
       */
-     public function find(int $id)
+     public function find(int $id): mixed
      {
           return $this->table($this->table)->where('id', '=', $id)->getOne();
      }
