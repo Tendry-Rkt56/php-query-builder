@@ -15,6 +15,12 @@ class DataBase
      * @var \PDO
      */
      private $conn;
+     
+     /**
+     * Nom de la base de données.
+     *
+     * @var string
+     */
      private string $dbName;
 
      public function __construct(string $dbName)
