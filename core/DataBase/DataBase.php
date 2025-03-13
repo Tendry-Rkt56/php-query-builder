@@ -9,6 +9,11 @@ namespace Core\DataBase;
 class DataBase 
 {
 
+     /**
+     * Instance de connexion PDO.
+     *
+     * @var \PDO
+     */
      private $conn;
      private string $dbName;
 
