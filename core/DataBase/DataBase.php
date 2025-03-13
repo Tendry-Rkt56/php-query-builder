@@ -2,6 +2,10 @@
 
 namespace Core\DataBase;
 
+
+/**
+ * Classe de gestion de la connexion à la base de données.
+ */
 class DataBase 
 {
 
