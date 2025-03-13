@@ -13,8 +13,25 @@ use Core\DataBase\QueryBuilder;
 class App 
 {
 
+     /**
+     * Instance unique de l'application.
+     *
+     * @var self|null
+     */
      private static $_instance;
+     
+     /**
+     * Instance de la base de données.
+     *
+     * @var DataBase|null
+     */
      private static $_db;
+     
+     /**
+     * Instance du QueryBuilder.
+     *
+     * @var QueryBuilder|null
+     */
      private static $_builder;
 
      public static function getInstance(): self
