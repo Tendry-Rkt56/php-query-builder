@@ -57,6 +57,12 @@ class App
           return self::$_db;
      }
 
+
+     /**
+     * Retourne l'instance du QueryBuilder.
+     *
+     * @return QueryBuilder L'instance du QueryBuilder pour la construction de requêtes SQL.
+     */
      public function getQueryBuilder(): QueryBuilder
      {
           if (self::$_builder == null) self::$_builder = new QueryBuilder($this->getDb());
