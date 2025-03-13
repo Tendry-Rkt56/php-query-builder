@@ -19,5 +19,5 @@ var_dump($queryBuilder->table('articles')->where('nom', 'LIKE', '%lasopy%')->orW
 var_dump($queryBuilder->table('category')->get());
 var_dump($article->findAll());
 var_dump($queryBuilder->table('articles')->where('id', '=', 84)->delete());
-var_dump($queryBuilder->table('articles')->insert(['nom' => 'Lasopy akoho', 'prix' => 5000, 'category_id' => 5]));
+var_dump($queryBuilder->table('articles')->insert(['nom' => 'Lasopy légume', 'prix' => 5000, 'category_id' => 5]));
 var_dump($article->find(90));
