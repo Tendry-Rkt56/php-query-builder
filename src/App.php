@@ -70,9 +70,11 @@ class App
      }
 
      /**
+     * Instancie une entité en lui passant la connexion à la base de données.
+     *
      * @template T of object
-     * @param class-string<T> $class
-     * @return T
+     * @param class-string<T> $class Le nom de la classe de l'entité à instancier.
+     * @return T L'instance de l'entité demandée.
      */
      public function getEntity(string $class)
      {
