@@ -23,6 +23,14 @@ class DataBase
      */
      private string $dbName;
 
+     /**
+     * Constructeur de la classe DataBase.
+     *
+     * Initialise la connexion à la base de données en utilisant les constantes de configuration.
+     *
+     * @param string $dbName Le nom de la base de données à utiliser.
+     * @throws \PDOException En cas d'échec de connexion à la base de données.
+     */
      public function __construct(string $dbName)
      {
           $this->dbName = $dbName;
