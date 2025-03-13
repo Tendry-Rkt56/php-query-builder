@@ -34,7 +34,7 @@ class App
      */
      private static $_builder;
 
-     
+
      /**
      * Retourne l'instance unique de l'application (Singleton).
      *
@@ -46,6 +46,11 @@ class App
           return self::$_instance;
      }
 
+     /**
+     * Retourne l'instance de la base de données.
+     *
+     * @return DataBase L'instance de connexion à la base de données.
+     */
      public function getDb(): DataBase
      {
           if (self::$_db == null) self::$_db = new DataBase(DB_NAME);
