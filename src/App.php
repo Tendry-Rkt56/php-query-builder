@@ -6,6 +6,8 @@ use Core\DataBase\DataBase;
 use Core\DataBase\QueryBuilder;
 
 /**
+ * Classe principale de l'application, implémentant un singleton.
+ *
  * @template T of object
  */
 class App 
