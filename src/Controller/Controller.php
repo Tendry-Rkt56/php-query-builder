@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\App;
+
 class Controller
 {
 
-     public function __construct()
+     public function __construct(private App $app)
      {
           if (session_status() == PHP_SESSION_NONE) session_start();
      }
@@ -14,6 +16,11 @@ class Controller
      {
           extract($data);
           require_once '../templates/'.$template;
+     }
+
+     public function getEntity(string $class)
+     {
+          return $this->app->getEntity($class);
      }
 
 }
