@@ -18,6 +18,11 @@ class Controller
           require_once '../templates/'.$template;
      }
 
+     /**
+     * @template T of object
+     * @param class-string<T> $table
+     * @return T
+     */
      public function getEntity(string $class)
      {
           return $this->app->getEntity($class);
