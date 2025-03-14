@@ -20,7 +20,7 @@ class Controller
 
      /**
      * @template T of object
-     * @param class-string<T> $table
+     * @param class-string<T> $class
      * @return T
      */
      public function getEntity(string $class)
