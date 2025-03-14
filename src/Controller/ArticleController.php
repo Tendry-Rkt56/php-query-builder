@@ -20,4 +20,12 @@ class ArticleController extends Controller
      //      return $this->render('articles/create.html.php');
      // }
 
+     // public function edit(int $id)
+     // {
+     //      $article = $this->getEntity(Article::class)->find($id);
+     //      return $this->render('articles/edit.html.php', [
+     //           'article' => $article,
+     //      ]);
+     // }
+
 }
